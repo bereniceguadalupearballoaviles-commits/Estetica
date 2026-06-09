@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jardín Botánico</title>
+    <style>
+        :root {
+            --primary: #2d5a27;
+            --secondary: #d2b48c;
+            --dark: #2b2621;
+            --light: #f9f6f0;
+            --accent: #e07a5f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('dbdc2484-4c58-4e31-b50d-7b0e326104d7.jpg') no-gradient;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .grid-plantas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--secondary);
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .card-scientific {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .audio-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .audio-btn:hover {
+            background-color: #1e3d1a;
+        }
+
+        .audio-btn.playing {
+            background-color: var(--accent);
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .grid-plantas { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Jardín Botánico</h1>
+        <p>Explora la riqueza biológica, adaptaciones milenarias y secretos de la flora nativa de las zonas áridas.</p>
+    </header>
+
+    <div class="container">
+        <div class="grid-plantas">
+
+            <div class="card">
+                <img src="217a3433-11b9-423f-9074-757a61aa53f0.jpg" alt="Cactus Cardón" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Cardón Gigante</h2>
+                    <p class="card-scientific">Pachycereus pringlei</p>
+                    <p class="card-text" id="text-cardon">
+                        El Cardón es el cactus más alto del mundo, capaz de alcanzar hasta veinte metros de altura y vivir por cientos de años. Es una especie emblemática de las zonas áridas de México. Su imponente estructura columnar almacena toneladas de agua en su interior carnoso protegido por costillas, lo que le permite sobrevivir a sequías extremas. Sirve como un ecosistema vivo, dando refugio y alimento a diversas aves y polinizadores nocturnos como los murciélagos.
+                    </p>
+                    <button class="audio-btn" onclick="toggleAudio('text-cardon', this)">
+                        <span>🔊 Escuchar Info</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="1898bb62-5201-4169-bfc8-3ea3bc43dfc9.jpg" alt="Arbusto de Jojoba" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Jojoba</h2>
+                    <p class="card-scientific">Simmondsia chinensis</p>
+                    <p class="card-text" id="text-jojoba">
+                        La Jojoba es un arbusto silvestre sumamente resistente a las condiciones extremas del desierto. Sus hojas de color verde azulado tienen una textura cerosa que reduce la pérdida de humedad por evaporación. Es mundialmente conocida debido a que de sus semillas se extrae una cera líquida, mal llamada aceite, que posee propiedades excepcionales para la industria cosmética y farmacéutica, siendo un excelente hidratante natural que no obstruye los poros.
+                    </p>
+                    <button class="audio-btn" onclick="toggleAudio('text-jojoba', this)">
+                        <span>🔊 Escuchar Info</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="WhatsApp Image 2025-05-19 at 5.53.58 PM.jpg" alt="Copal Blanco" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Copal Blanco</h2>
+                    <p class="card-scientific">Bursera copallifera</p>
+                    <p class="card-text" id="text-copal">
+                        El Copal Blanco es un árbol místico de corteza clara y ramas extendidas que entra en un estado de reposo perdiendo sus hojas en la temporada seca para conservar energía. Es una planta sumamente valorada desde la época prehispánica debido a su resina aromática. Al ser extraída y quemada, esta resina produce un humo blanco y fragante que ha sido utilizado tradicionalmente en rituales espirituales, purificaciones y como remedio medicinal casero.
+                    </p>
+                    <button class="audio-btn" onclick="toggleAudio('text-copal', this)">
+                        <span>🔊 Escuchar Info</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="aabf4e26-a12c-472e-bf76-3e1ccd9dc1ab.jpg" alt="Nopal" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Nopal / Opuntia</h2>
+                    <p class="card-scientific">Opuntia ficus-indica</p>
+                    <p class="card-text" id="text-nopal">
+                        El Nopal es uno de los cactus más versátiles y culturalmente importantes. Se caracteriza por sus tallos planos y ovoides llamados pencas, cubiertos de espinas que lo protegen de los depredadores. Esta planta produce deliciosos frutos comestibles conocidos como tunas. Además de su alto valor nutricional y gastronómico en la cocina tradicional, el nopal es utilizado en la medicina alternativa para regular los niveles de azúcar en la sangre y fibra digestiva.
+                    </p>
+                    <button class="audio-btn" onclick="toggleAudio('text-nopal', this)">
+                        <span>🔊 Escuchar Info</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="e9fec11d-dd60-4475-b8d5-7575ef712edf.jpg" alt="Cactus Órgano" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Cactus Órgano / Pitayo</h2>
+                    <p class="card-scientific">Stenocereus thurberi</p>
+                    <p class="card-text" id="text-organo">
+                        Llamado comúnmente Órgano debido a que sus múltiples brazos crecen verticalmente desde una base común, asemejando los tubos de un órgano musical de iglesia. Esta cactácea columnar crece a un ritmo lento y genera hermosas flores que abren exclusivamente por la noche. Sus frutos, conocidos como pitayas dulces, han sido una fuente vital de alimento veraniego para las comunidades indígenas locales durante milenios.
+                    </p>
+                    <button class="audio-btn" onclick="toggleAudio('text-organo', this)">
+                        <span>🔊 Escuchar Info</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="b1a0a3e1-53ac-4a32-9438-da27f0b7e2b2.jpg" alt="Biznagas" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Biznaga de Compás</h2>
+                    <p class="card-scientific">Ferocactus wislizeni</p>
+                    <p class="card-text" id="text-biznaga">
+                        Las biznagas son cactáceas globulares o cilíndricas de baja altura que crecen en el suelo del desierto. Están densamente armadas con espinas fuertes y ganchudas que actúan como escudo contra el sol y los animales. Son famosas por su capacidad de inclinarse lentamente hacia el sur a lo largo de su vida, sirviendo como una brújula natural para los viajeros perdidos. Actualmente se encuentran protegidas debido a la explotación y pérdida de hábitat.
+                    </p>
+                    <button class="audio-btn" onclick="toggleAudio('text-biznaga', this)">
+                        <span>🔊 Escuchar Info</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Huerto Digital Desértico. Creado para divulgación botánica y educación ambiental.</p>
+    </footer>
+
+    <script>
+        // Sistema de Voz (Text-to-Speech)
+        let currentUtterance = null;
+        let currentButton = null;
+
+        function toggleAudio(textId, button) {
+            // Si ya se está reproduciendo el mismo audio, lo detiene
+            if (window.speechSynthesis.speaking && currentButton === button) {
+                window.speechSynthesis.cancel();
+                resetButton(button);
+                return;
+            }
+
+            // Detener cualquier audio que esté sonando antes de iniciar otro
+            window.speechSynthesis.cancel();
+            if (currentButton) resetButton(currentButton);
+
+            // Obtener el texto de la tarjeta de la planta
+            const textToSpeak = document.getElementById(textId).innerText;
+            
+            // Configurar el motor de voz del navegador
+            currentUtterance = new SpeechSynthesisUtterance(textToSpeak);
+            currentUtterance.lang = 'es-MX'; // Configurado en español
+            currentUtterance.rate = 1.0;     // Velocidad normal de lectura
+
+            currentButton = button;
+            button.classList.add('playing');
+            button.innerHTML = '<span>⏹ Detener Audio</span>';
+
+            // Al terminar el audio, restablecer el botón
+            currentUtterance.onend = function() {
+                resetButton(button);
+            };
+
+            // Reproducir
+            window.speechSynthesis.speak(currentUtterance);
+        }
+
+        function resetButton(btn) {
+            btn.classList.remove('playing');
+            btn.innerHTML = '<span>🔊 Escuchar Info</span>';
+        }
+    </script>
+</body>
+</html>
